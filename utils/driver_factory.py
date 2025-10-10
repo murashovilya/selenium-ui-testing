@@ -1,33 +1,27 @@
-import platform
+from typing import Union, cast
 
 from selenium import webdriver
-from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
-from selenium.webdriver.ie.options import Options as IEOptions
-from selenium.webdriver.common.options import ArgOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.remote.webdriver import WebDriver
+
+WebDriverOptions = Union[ChromeOptions, FirefoxOptions, EdgeOptions]
 
 
 class DriverFactory:
     @staticmethod
     def get_driver(grid: bool, browser: str) -> WebDriver:
         options = DriverFactory._options(browser)
-        if browser == "ie":
-            if not grid and platform.system() != "Windows":
-                raise Exception("Браузер IE поддерживается только на Windows")
-            DriverFactory._ie_settings(options)
-        else:
-            DriverFactory._arguments(options)
+        DriverFactory._arguments(options)
         if grid:
             return webdriver.Remote(
-                command_executor="http://localhost:4444",
-                options=options
+                command_executor="http://localhost:4444", options=options
             )
         return DriverFactory._driver(browser, options)
 
     @staticmethod
-    def _options(browser: str) -> ArgOptions:
+    def _options(browser: str) -> WebDriverOptions:
         match browser:
             case "chrome":
                 return ChromeOptions()
@@ -35,31 +29,22 @@ class DriverFactory:
                 return FirefoxOptions()
             case "edge":
                 return EdgeOptions()
-            case "ie":
-                return IEOptions()
             case _:
                 raise ValueError(f"Некорректное название браузера: {browser}")
 
     @staticmethod
-    def _arguments(options: ArgOptions) -> None:
+    def _arguments(options: WebDriverOptions) -> None:
         options.add_argument("--headless")
         options.add_argument("--window-size=1920,1080")
 
     @staticmethod
-    def _ie_settings(options: ArgOptions) -> None:
-        options.ignore_protected_mode_settings = True
-        options.require_window_focus = True
-
-    @staticmethod
-    def _driver(browser: str, options: ArgOptions) -> WebDriver:
+    def _driver(browser: str, options: WebDriverOptions) -> WebDriver:
         match browser:
             case "chrome":
-                return webdriver.Chrome(options)
+                return webdriver.Chrome(cast(ChromeOptions, options))
             case "firefox":
-                return webdriver.Firefox(options)
+                return webdriver.Firefox(cast(FirefoxOptions, options))
             case "edge":
-                return webdriver.Edge(options)
-            case "ie":
-                return webdriver.Ie(
-                    options, executable_path="IEDriverServer.exe"
-                )
+                return webdriver.Edge(cast(EdgeOptions, options))
+            case _:
+                raise ValueError(f"Некорректное название браузера: {browser}")
