@@ -1,18 +1,64 @@
-# Проект тестирования UI
+# UI Automation Framework with Selenium & Python
 
-## Описание проекта
+![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+![pytest-xdist](https://img.shields.io/badge/xdist-parallel_testing-orange?style=for-the-badge)
+![uv](https://img.shields.io/badge/uv-FF6A33?style=for-the-badge)
+![Ruff](https://img.shields.io/badge/Ruff-10B981?style=for-the-badge&logo=ruff&logoColor=white)
+![Pyright](https://img.shields.io/badge/Pyright-4EAAAF?style=for-the-badge)
+![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
-Тестирование веб-приложений с использованием Selenium (GRID)
+UI automation testing framework built with Selenium WebDriver and Python. Leverages the latest Selenium features with driver management and advanced Python tooling for maximum productivity.
 
-## Запуск тестов
+## ✨ Key Features
 
-Создать виртуальное окружение `python -m venv .venv` \
-Активировать виртуальное окружение `source .venv/bin/activate` \
-Установить зависимости `pip install -r requirements.txt` \
-Запустить тесты без GRID `sh run_tests.sh BROWSERS N`
-или с GRID `sh run_tests_with_grid.sh BROWSERS N` \
-где BROWSERS - названия браузеров (chrome,firefox,edge,ie) \
-N - количество параллельных потоков (если не указывать, то будет "auto") \
-Пример запуска тестов без GRID, браузер Chrome, в 2 потока `sh run_tests.sh chrome 2` \
-Пример запуска тестов с GRID, браузеры Chrome и Firefox, в 4 потока `sh run_tests_with_grid.sh chrome,firefox 4` \
-Открыть отчет `allure serve allure-results`
+- **Selenium GRID**: Uses Selenium GRID
+- **Allure**: Reporting and analytics for test results
+- **Cross-Browser Testing**: Support for Chrome, Firefox and Edge
+- **Page Object Pattern**: Maintainable and reusable test code structure
+- **Parallel Execution**: Distributed testing for faster results
+- **Headless Execution**: Support for headless browser testing
+- **CI/CD**: Integration with GitHub Actions
+
+## 🛠 Technology Stack
+
+| Category | Technologies |
+|----------|--------------|
+| **Test Automation** | Selenium WebDriver (GRID) |
+| **Programming Language** | Python |
+| **Testing Framework** | pytest |
+| **Package Management** | uv |
+| **Code Quality** | ruff |
+| **Type Checking** | pyright |
+
+## 📋 Prerequisites
+
+- **Python 3.13** or higher
+- **Git** for version control
+- **Allure** for report generation
+- **uv** for package management
+
+## 🚀 Quick Start
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/sdet0mis/ui-testing.selenium.git
+cd ui-testing.selenium
+```
+### 2. Install Dependencies
+
+```bash
+uv sync
+```
+
+### 3. Run Tests and Generate Report
+
+```bash
+./run_tests.sh
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
