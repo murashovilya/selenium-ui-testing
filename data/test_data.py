@@ -7,8 +7,7 @@ from faker import Faker
 class Customer:
     first_name: str = field(default_factory=lambda: Faker().first_name())
     last_name: str = field(default_factory=lambda: Faker().last_name())
-    email: str = field(default_factory=lambda: Faker().email())
-    phone_number: str = field(default_factory=lambda: Faker().phone_number())
+    post_code: str = field(default_factory=lambda: Faker().postcode())
 
 
 @dataclass
