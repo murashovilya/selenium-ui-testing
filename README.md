@@ -1,4 +1,4 @@
-# UI Automation Framework with Selenium & Python
+# UI automation testing project
 
 ![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -9,7 +9,7 @@
 ![Pyright](https://img.shields.io/badge/Pyright-4EAAAF?style=for-the-badge)
 ![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
-UI automation testing framework built with Selenium WebDriver and Python. Leverages the latest Selenium features with driver management and advanced Python tooling for maximum productivity.
+UI automation testing project. Leverages the latest Selenium features with driver management and advanced Python tooling for maximum productivity.
 
 ## ✨ Key Features
 
@@ -44,8 +44,8 @@ UI automation testing framework built with Selenium WebDriver and Python. Levera
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/sdet0mis/ui-testing.selenium.git
-cd ui-testing.selenium
+git clone https://github.com/murashovilya/selenium-ui-testing.git
+cd selenium-ui-testing
 ```
 ### 2. Install Dependencies
 
@@ -56,7 +56,7 @@ uv sync
 ### 3. Run Tests and Generate Report
 
 ```bash
-./run_tests.sh
+sh run_tests.sh
 ```
 
 ## 📄 License
