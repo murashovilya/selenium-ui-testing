@@ -28,7 +28,7 @@ from utils.driver_factory import DriverFactory
 load_dotenv()
 
 BROWSERS = os.getenv("BROWSERS")
-DRIVER_KEY = pytest.StashKey[WebDriver]()
+# DRIVER_KEY = pytest.StashKey[WebDriver]()
 
 
 @pytest.fixture(params=BROWSERS.split(",") if BROWSERS else ["chrome"], scope="session")
@@ -36,20 +36,20 @@ def driver(request: pytest.FixtureRequest) -> Generator[WebDriver, None, None]:
     driver = DriverFactory.get_driver(
         grid=True if os.getenv("GRID") else False, browser=request.param
     )
-    request.node.stash[DRIVER_KEY] = driver
+    request.node.driver = driver
     yield driver
     driver.quit()
 
 
-@pytest.hookimpl(tryfirst=True)
-def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo) -> None:
-    if call.when == "call" and call.excinfo is not None:
-        driver = item.stash[DRIVER_KEY]
-        allure.attach(
-            driver.get_screenshot_as_png(),
-            "screenshot",
-            allure.attachment_type.PNG,
-        )
+# @pytest.hookimpl(tryfirst=True)
+# def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo) -> None:
+#     if call.when == "call" and call.excinfo is not None:
+#         driver = item.driver  # type: ignore
+#         allure.attach(
+#             driver.get_screenshot_as_png(),
+#             "screenshot",
+#             allure.attachment_type.PNG,
+#         )
 
 
 @pytest.fixture(scope="session")
