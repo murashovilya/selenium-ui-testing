@@ -6,7 +6,7 @@ import pytest
 from dotenv import load_dotenv
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from data.test_data import Customer, Credentials
+from data.test_data import Credentials, Customer
 from pages.add_customer_page import AddCustomerPage
 from pages.alert_page import AlertPage
 from pages.authentication_page import AuthenticationPage
@@ -41,15 +41,15 @@ def driver(request: pytest.FixtureRequest) -> Generator[WebDriver, None, None]:
     driver.quit()
 
 
-# @pytest.hookimpl(tryfirst=True)
-# def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo) -> None:
-#     if call.when == "call" and call.excinfo is not None:
-#         driver = item.driver  # type: ignore
-#         allure.attach(
-#             driver.get_screenshot_as_png(),
-#             "screenshot",
-#             allure.attachment_type.PNG,
-#         )
+@pytest.hookimpl(tryfirst=True)
+def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo) -> None:
+    if call.when == "call" and call.excinfo is not None:
+        driver = item.driver  # type: ignore
+        allure.attach(
+            driver.get_screenshot_as_png(),
+            "screenshot",
+            allure.attachment_type.PNG,
+        )
 
 
 @pytest.fixture(scope="session")
